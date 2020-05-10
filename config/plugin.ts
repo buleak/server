@@ -10,6 +10,10 @@ const plugin: EggPlugin = {
     enable: true,
     package: 'egg-cors'
   },
+  snowflake: { // 生成唯一标识 
+    enable: true,
+    package: 'egg-snowflake'
+  },
   mongoose: { // mongodb数据库
     enable: true,
     package: 'egg-mongoose'

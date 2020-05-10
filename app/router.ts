@@ -27,6 +27,12 @@ export default (app: Application) => {
   // 图床应用 API
   router.resources('/imgur', jwt, controller.imgur)
 
+  
+  // chat API
+  router.resources('login', '/chat/login', controller.login)
+  router.resources('group', '/chat/group', jwt, controller.group)
+  router.resources('address', '/chat/address', jwt, controller.address)
+  router.resources('msg', '/chat/msg', jwt, controller.msg)
 
   // ------ socket.io ------
   router.resources('/chatHistory', jwt, controller.chatHistory)

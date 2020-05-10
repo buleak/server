@@ -1,24 +1,22 @@
 export default app => {
     const db = app.mongoose, Schema = db.Schema;
-    const GroupSchema = new Schema({
-        avatar: String,
-        userID: String,
-        userName: String,
+    const MsgSchema = new Schema({
         groupID: String,
         groupName: String,
         groupAvatar: String,
-        groupType: Number, // 1-群聊 2-私聊
-        groupProfile: String,
-        memberList: [
+        msgProfile: String,
+        msgList: [
             {
                 avatar: String,
                 userID: String,
                 userName: String,
-                joinGroupDate: Number,
+                msg: String,
+                msgID: String,
+                msgDate: Number,
             }
         ],
     })
 
-    return db.model('group', GroupSchema)
+    return db.model('msg', MsgSchema)
 }
 

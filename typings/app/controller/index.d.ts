@@ -2,9 +2,13 @@
 // Do not modify this file!!!!!!!!!
 
 import 'egg';
+import ExportAddress from '../../../app/controller/address';
 import ExportChatHistory from '../../../app/controller/chatHistory';
 import ExportDemo from '../../../app/controller/demo';
+import ExportGroup from '../../../app/controller/group';
 import ExportImgur from '../../../app/controller/imgur';
+import ExportLogin from '../../../app/controller/login';
+import ExportMsg from '../../../app/controller/msg';
 import ExportRank from '../../../app/controller/rank';
 import ExportRestful from '../../../app/controller/restful';
 import ExportSearch from '../../../app/controller/search';
@@ -13,9 +17,13 @@ import ExportUser from '../../../app/controller/user';
 
 declare module 'egg' {
   interface IController {
+    address: ExportAddress;
     chatHistory: ExportChatHistory;
     demo: ExportDemo;
+    group: ExportGroup;
     imgur: ExportImgur;
+    login: ExportLogin;
+    msg: ExportMsg;
     rank: ExportRank;
     restful: ExportRestful;
     search: ExportSearch;

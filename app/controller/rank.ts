@@ -1,7 +1,7 @@
 'use strict';
 import { Controller } from 'egg'
-import { BodyBoolean } from '../interface'
-export default class UserSearch extends Controller {
+import { LoginRes } from '../interface'
+export default class Rank extends Controller {
     /**
      * 排序接口：用户排行榜
      */
@@ -13,14 +13,14 @@ export default class UserSearch extends Controller {
         ctx.body = {userNameList}
     }
     /**
-     * 注册接口：获取用户输入的 [userName, passWord, email, rePassWord]，进行账号注册
+     * 注册接口：获取用户输入的 [userName, passWord, sex, rePassWord]，进行账号注册
      */
     async create() { // POST - /XXX - XXX
         const { ctx, service } = this;
-        const { userName, passWord, email } = ctx.request.body;
+        const { userName, passWord, sex } = ctx.request.body;
         let hasCustomer:boolean = await service.user.hasCustomer(userName);
-        let isRegistered:boolean = await service.user.register(userName, passWord, email)
-        let body: BodyBoolean;
+        let isRegistered:boolean = await service.user.register(userName, passWord, sex)
+        let body: LoginRes;
         if(hasCustomer) { 
             body = { status: false, msg: '该账号已存在' } 
         }else {

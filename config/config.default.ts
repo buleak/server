@@ -25,6 +25,20 @@ export default (appInfo: EggAppInfo) => {
     allowMethods: 'GET, HEAD, PUT, POST, PATCH, DELETE'
   }
 
+  // 生成唯一标识 uuid
+  config.snowflake = {
+    client: {
+      machineId: 1,
+      // `Number` if 6-bit length (the default value),
+      // we could handle servers from `2 ** 6` different machines.
+      // And if 0, there will be no machine id in the uuid
+      machineIdBitLength: 6,
+      workerIdBitLength: 4,
+      // Could handle max 4096 requests per millisecond
+      serialIdBitLength: 12
+    }
+  }
+
   // mongoDB数据库
   config.mongoose = {
     url: 'mongodb://47.94.3.149:27017/admin', // 对应 adminMongo的地址 mongodb://47.94.3.149:27017/admin。[admin是数据库，users是数据表]
@@ -54,11 +68,11 @@ export default (appInfo: EggAppInfo) => {
     },
     namespace: { // 命名空间
       // 对每一次 socket 连接的建立/断开、每一次消息/数据传递进行预处理
-      '/': { 
+      '/': {
         connectionMiddleware: [], //['auth']
         packetMiddleware: [],
       },
-      '/chat': { 
+      '/chat': {
         connectionMiddleware: [],
         packetMiddleware: [],
       },

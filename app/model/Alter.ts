@@ -1,6 +1,6 @@
 export default app => {
     const db = app.mongoose, Schema = db.Schema;
-    const UserSchema = new Schema({
+    const AlterSchema = new Schema({
         user: { type: String },
         pwd: { type: String }
     })
@@ -31,6 +31,6 @@ export default app => {
      *  
      * Schema: 指定数据库集合内数据格式
      */
-    return db.model('life', UserSchema) 
+    return db.model('alter', AlterSchema) 
 }
 

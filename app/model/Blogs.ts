@@ -15,6 +15,6 @@ export default app => {
         commentList: {type:Array}, // 评论列表
     })
 
-    return db.model('blogs', BlogSchema)
+    return db.model('blog', BlogSchema)
 }
 

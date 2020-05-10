@@ -15,6 +15,7 @@ import 'egg-static';
 import 'egg-jsonp';
 import 'egg-view';
 import 'egg-cors';
+import 'egg-snowflake';
 import 'egg-mongoose';
 import 'egg-jwt';
 import 'egg-redis';
@@ -35,6 +36,7 @@ declare module 'egg' {
     jsonp?: EggPluginItem;
     view?: EggPluginItem;
     cors?: EggPluginItem;
+    snowflake?: EggPluginItem;
     mongoose?: EggPluginItem;
     jwt?: EggPluginItem;
     redis?: EggPluginItem;

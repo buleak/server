@@ -14,6 +14,6 @@ export default app => {
         ]
     })
 
-    return db.model('chats', ChatSchema)
+    return db.model('chat', ChatSchema)
 }
 

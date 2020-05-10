@@ -4,6 +4,7 @@ import { EggSocketIO, EggSocketNameSpace } from 'egg';
 declare module 'egg' {
     interface Application {
         jwt: any;
+        snowflake: any;
         io: Server & EggSocketIO & EggSocketNameSpace
     }
     interface Context {
