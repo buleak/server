@@ -14,12 +14,12 @@ export default class UserSearch extends Controller {
         if(hasCustomer) {
             let isCustomer: boolean = await service.user.isCustomer(userName, passWord);
             if(isCustomer) {
-                let {sex, userID, avatar, msgNum, registerDate, lastOnlineDate, lastOnlineMsg} = await service.user.findUserInfo(userName);
+                let {sex, userID, avatar, registerDate} = await service.user.findUserInfo(userName);
                 const token = app.jwt.sign({ // jwt设置 token
                     userName // 需要储存的 token数据
                  }, app.config.jwt.secret, { expiresIn: '1h' }); 
                 await app.redis.set(`token_${userName}`, token) // redis储存 token
-                body = { status: true, msg: '登陆成功', token, userInfo: {sex, userName, userID, avatar, msgNum, registerDate, lastOnlineDate, lastOnlineMsg} }
+                body = { status: true, msg: '登陆成功', token, userInfo: {sex, userName, userID, avatar, registerDate} }
             }else {
                 body = { status: false, msg: '账号密码错误' }
             }

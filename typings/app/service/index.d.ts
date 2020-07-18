@@ -10,6 +10,7 @@ import ExportAddress from '../../../app/service/address';
 import ExportBlog from '../../../app/service/blog';
 import ExportChat from '../../../app/service/chat';
 import ExportGroup from '../../../app/service/group';
+import ExportMsg from '../../../app/service/msg';
 import ExportTest from '../../../app/service/Test';
 import ExportUser from '../../../app/service/user';
 
@@ -19,6 +20,7 @@ declare module 'egg' {
     blog: AutoInstanceType<typeof ExportBlog>;
     chat: AutoInstanceType<typeof ExportChat>;
     group: AutoInstanceType<typeof ExportGroup>;
+    msg: AutoInstanceType<typeof ExportMsg>;
     test: AutoInstanceType<typeof ExportTest>;
     user: AutoInstanceType<typeof ExportUser>;
   }

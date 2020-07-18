@@ -13,9 +13,17 @@ export default class Group extends Controller {
         ctx.body = historyGroup
     }
     /**
-     * 添加好友接口：
+     * 创建群聊接口：
      */
     async create() {
-        
+        const { app, ctx, service } = this
+        const groupID = await app.snowflake.uuid()
+        console.log('body', ctx.request.body)
+        const {userID, groupName, groupType, groupAvatar, memberList} = ctx.request.body
+        await service.group.createGroup(userID, groupID, groupType, groupName, groupAvatar, memberList)
+        ctx.body = {
+            status: true,
+            msg: '建群成功'
+        }
     }
 }

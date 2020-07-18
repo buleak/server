@@ -1,26 +1,30 @@
 import { Service } from 'egg';
 
 export default class AddressService extends Service {
-    async getAddress(userID:string) {
+    /**
+     * 查询是否存在用户
+     * @param userID 用户ID
+     */
+    async getAddress(userID: string) {
         const result = await this.ctx.model.Address.findOne({ userID })
-        if(result) {
+        if (result) {
             return result
-        }else {
-            const {userName, avatar} = await this.ctx.model.User.findOne({userID})
-            await this.ctx.model.Address.insertMany({ 
+        } else {
+            const { userName, avatar } = await this.ctx.model.User.findOne({ userID })
+            await this.ctx.model.Address.insertMany({
                 avatar,
                 userID,
                 userName,
                 joinGroupList: [],
                 becomeFriendList: [],
-             })
-            return { 
+            })
+            return {
                 avatar,
                 userID,
                 userName,
                 joinGroupList: [],
                 becomeFriendList: [],
-             }
+            }
         }
     }
     /**
@@ -32,7 +36,7 @@ export default class AddressService extends Service {
         // const result = await this.ctx.model.Address.findOne({ userID })
         const result = await this.getAddress(userID)
         return {
-            joinGroupList: result.joinGroupList, 
+            joinGroupList: result.joinGroupList,
             becomeFriendList: result.becomeFriendList,
         }
         // if(result) {
@@ -54,16 +58,54 @@ export default class AddressService extends Service {
         //     }
         // }
     }
-
-    async addFriend(userID:string, targetID:string) {
-        await this.getAddress(userID)
-        const {userName, avatar} = await this.ctx.model.User.findOne({userID: targetID})
-        await this.ctx.model.Address.updateOne({ userID }, {'$addToSet': {becomeFriendList: {
-            avatar,
-            userName,
-            userID: targetID,
-            becomeFriendDate: new Date().getTime(),
-        }}})
+    /**
+     * 用户和目标互相添加好友 [TODO: 应该是用户发送好友申请, 目标同意后才成为好友. 现在是直接互相添加为好友.]
+     * @param userID 用户ID
+     * @param targetID 目标好友ID
+     */
+    async addFriend(userID: string, targetID: string) {
+        const { userName, avatar } = await this.getAddress(userID)
+        const { userName: targetName, avatar: targetAvatar } = await this.ctx.model.User.findOne({ userID: targetID })
+        await this.ctx.model.Address.updateOne({ userID }, {
+            '$addToSet': {
+                becomeFriendList: {
+                    avatar: targetAvatar,
+                    userID: targetID,
+                    userName: targetName,
+                    becomeFriendDate: new Date().getTime(),
+                }
+            }
+        })
+        await this.ctx.model.Address.updateOne({ userID: targetID }, {
+            '$addToSet': {
+                becomeFriendList: {
+                    avatar,
+                    userID,
+                    userName,
+                    becomeFriendDate: new Date().getTime(),
+                }
+            }
+        })
         return true
+    }
+    /**
+     * 将用户加入的群信息收录到 joinGroupList里面
+     * @param userID 用户ID
+     * @param groupID 群ID
+     */
+    async joinGroup(userID: string, groupID: string) {
+        const { groupName, groupType, groupAvatar } = await this.ctx.model.Group.findOne({ groupID })
+        console.log('object', groupName, groupType, groupAvatar)
+        await this.ctx.model.Address.updateOne({ userID }, {
+            '$addToSet': {
+                joinGroupList: {
+                    groupID,
+                    groupName,
+                    groupType,
+                    groupAvatar,
+                    joinGroupDate: new Date().getTime(),
+                }
+            }
+        })
     }
 }

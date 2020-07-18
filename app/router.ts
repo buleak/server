@@ -30,6 +30,7 @@ export default (app: Application) => {
   
   // chat API
   router.resources('login', '/chat/login', controller.login)
+  router.get('oAuthGithub', '/oAuthGithub', controller.oAuth.github)
   router.resources('group', '/chat/group', jwt, controller.group)
   router.resources('address', '/chat/address', jwt, controller.address)
   router.resources('msg', '/chat/msg', jwt, controller.msg)

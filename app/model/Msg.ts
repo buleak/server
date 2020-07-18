@@ -4,7 +4,6 @@ export default app => {
         groupID: String,
         groupName: String,
         groupAvatar: String,
-        msgProfile: String,
         msgList: [
             {
                 avatar: String,

@@ -7,12 +7,8 @@ export default app => {
         userName: String,
         passWord: String,
         sex: String,
-        star: Number,
-        score: Number,
         msgNum: Number,
         registerDate: Number,
-        lastOnlineMsg: String,
-        lastOnlineDate: Number,
     })
 
     return db.model('user', UserSchema)

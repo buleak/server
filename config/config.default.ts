@@ -9,19 +9,23 @@ export default (appInfo: EggAppInfo) => {
 
   // add your egg config in here
   config.middleware = [];
+  // HTTP全局配置
+  config.httpclient = {
+    enableDNSCache: false, // [false]是否开启本地 DNS缓存
+  }
 
   // 安全验证
   config.security = {
     csrf: { // 关闭 csrf安全验证
       enable: false,
     },
-    // domainWhiteList: ['*'] // 白名单,配置 cors.origin后失效
+    domainWhiteList: ['*'] // 白名单,配置 cors.origin后失效
   }
 
   // 跨域
   config.cors = {
     credentials: true,
-    origin: 'http://localhost:3000',
+    origin: 'http://localhost:3000', // http://buleak.top:9003
     allowMethods: 'GET, HEAD, PUT, POST, PATCH, DELETE'
   }
 
@@ -42,13 +46,15 @@ export default (appInfo: EggAppInfo) => {
   // mongoDB数据库
   config.mongoose = {
     url: 'mongodb://47.94.3.149:27017/admin', // 对应 adminMongo的地址 mongodb://47.94.3.149:27017/admin。[admin是数据库，users是数据表]
-    options: {}
+    options: {
+      useUnifiedTopology: true
+    },
   }
 
   // redis内存数据库 管理存储 token
   config.redis = {
     client: {
-      port: 6000,
+      port: 6379,
       host: '47.94.3.149',
       password: 'buleak',
       db: 0

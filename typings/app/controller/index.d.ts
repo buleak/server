@@ -9,6 +9,7 @@ import ExportGroup from '../../../app/controller/group';
 import ExportImgur from '../../../app/controller/imgur';
 import ExportLogin from '../../../app/controller/login';
 import ExportMsg from '../../../app/controller/msg';
+import ExportOAuth from '../../../app/controller/oAuth';
 import ExportRank from '../../../app/controller/rank';
 import ExportRestful from '../../../app/controller/restful';
 import ExportSearch from '../../../app/controller/search';
@@ -24,6 +25,7 @@ declare module 'egg' {
     imgur: ExportImgur;
     login: ExportLogin;
     msg: ExportMsg;
+    oAuth: ExportOAuth;
     rank: ExportRank;
     restful: ExportRestful;
     search: ExportSearch;

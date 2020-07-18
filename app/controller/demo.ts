@@ -32,6 +32,9 @@ export default class HomeController extends Controller {
    */
   public async index() {
     const { ctx } = this;
+    this.app.runSchedule('./remind_sleep.ts').then(data => {
+      console.log('sleep', data)
+    })
     ctx.body = 'Hello Egg'
   }
   public async prop() {
