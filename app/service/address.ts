@@ -1,8 +1,8 @@
 import { Service } from 'egg';
 
 export default class AddressService extends Service {
-    /**
-     * 查询是否存在用户
+    /** 
+     * 查询[Address数据库]是否存在用户
      * @param userID 用户ID
      */
     async getAddress(userID: string) {
