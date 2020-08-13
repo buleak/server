@@ -3,7 +3,7 @@ import { Controller } from 'egg'
 import { LoginRes, UserBaseInfo } from '../interface'
 export default class Login extends Controller {
     /**
-     * 登录接口：判断该用户是否存在于 mongoDB数据库
+     * 登录接口：判断该用户是否存在于 <User>数据库
      */
     async index() { 
         const { app, ctx, service } = this

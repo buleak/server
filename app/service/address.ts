@@ -59,7 +59,7 @@ export default class AddressService extends Service {
         // }
     }
     /**
-     * 用户和目标互相添加好友 [TODO: 应该是用户发送好友申请, 目标同意后才成为好友. 现在是直接互相添加为好友.]
+     * 用户和目标互相添加好友 [//TODO: 应该是用户发送好友申请, 目标同意后才成为好友. 现在是直接互相添加为好友.]
      * @param userID 用户ID
      * @param targetID 目标好友ID
      */

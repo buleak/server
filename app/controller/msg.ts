@@ -7,10 +7,16 @@ export default class Msg extends Controller {
      */
     async index() {
         const { ctx, service } = this
-        const { userID, groupID, groupType } = ctx.query
-        const groupInfo: GroupSchema = await service.group.getGroup(userID, groupID, groupType)
+        const { groupID, groupName } = ctx.query
+        const groupInfo: GroupSchema = await service.group.getGroup(groupID, groupName)
         const msg: MsgSchema = await service.msg.getMsg(groupID)
         const msgList: MsgInfo[] = msg.msgList
+        if(!groupInfo) {
+            ctx.body = {
+                status: 400,
+                msg: '未找到该群'
+            }
+        }
         ctx.body = {groupInfo, msgList}
     }
     /**

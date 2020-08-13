@@ -20,7 +20,7 @@ export default class Group extends Controller {
         const groupID = await app.snowflake.uuid()
         console.log('body', ctx.request.body)
         const {userID, groupName, groupType, groupAvatar, memberList} = ctx.request.body
-        await service.group.createGroup(userID, groupID, groupType, groupName, groupAvatar, memberList)
+        await service.group.createGroup(userID, groupID, groupName, groupType, groupAvatar, memberList)
         ctx.body = {
             status: true,
             msg: '建群成功'
